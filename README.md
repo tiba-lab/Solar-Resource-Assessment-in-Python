@@ -1,1 +1,1 @@
-# Solar-Resource-Assessment-in-Python
+# Solar Resource Assessment in Python
