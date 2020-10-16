@@ -1,14 +1,14 @@
 # Solar Resource Assessment in Python
 
 
-### *Table of Contents
+## *Table of Contents
 
-#### Introduction
+### Introduction
 ##### About this guide
 ##### Terminology
 
 
-#### Solar componenets and geometry
+### Solar componenets and geometry
 ##### Solar position algorithms
 ##### Incidence angles
 ##### Air mass
