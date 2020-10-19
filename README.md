@@ -22,6 +22,7 @@ Solar resource assessment is advancing rapidly, however, while new advances are 
 * Benchmarking
 
 
-
+### Contributing
+We are looking for more people to contribute, whether it be editing a section or creating an entire new section. If you are interested write arajen@byg.dtu.dk to hear more.
 
 
