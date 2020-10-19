@@ -15,7 +15,7 @@ Solar resource assessment is advancing rapidly, however, while new advances are 
 * Solar components and geometry
 * Solar radiation modelling
 * Solar resource data
-* Quality assessment
+* [Quality assessment](/quality_assessment.ipynb)
 * Manipulating time series
 * Forecasting
 * Solar power modelling
