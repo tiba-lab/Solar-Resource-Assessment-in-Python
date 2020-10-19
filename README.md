@@ -12,7 +12,7 @@ Solar resource assessment is advancing rapidly, however, while these new advance
 
 ### Table of Contents
 * Introduction
-* Solar componenets and geometry
+* Solar components and geometry
 * Solar radiation modelling
 * Solar resource data
 * Quality assessment
