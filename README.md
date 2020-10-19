@@ -1,5 +1,5 @@
 # Solar Resource Assessment in Python:
--------
+<hr style="border:2px solid gray"> </hr>
 ## Best practice guide with interactive examples 
 
 
