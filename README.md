@@ -1,5 +1,6 @@
-# Solar Resource Assessment in Python:  
-Best practice guide with interactive examples 
+# Solar Resource Assessment in Python:
+------
+## Best practice guide with interactive examples 
 
 
 ### About this guide
