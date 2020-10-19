@@ -1,5 +1,6 @@
 # Solar Resource Assessment in Python:
 **Best practice guide with interactive examples**
+![Processing of Solar Radiation Measurements in Python](/graphics/cover_photo.png)
 
 
 ### About
