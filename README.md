@@ -22,7 +22,8 @@ Contrary to traditional textbooks, this guide presents a general introduction of
 9. [Benchmarking](/benchmarking.ipynb)
 
 
-### Contributing
-We are looking for more people to contribute, whether it be simple corrections or contributing an entire new section. If you are interested write to arajen@byg.dtu.dk to hear more!
+### How to contribute
+You are welcome to contribute by making a pull request. If this is not your style you are also welcome to write any comments or sugestions to arajen@byg.dtu.dk.
 
+### Copyright and License
 
