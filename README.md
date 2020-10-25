@@ -23,6 +23,6 @@ Solar resource assessment is advancing rapidly, however, while new advances are 
 
 
 ### Contributing
-We are looking for more people to contribute, whether it be editing a section or creating an entire new section. If you are interested write arajen@byg.dtu.dk to hear more.
+We are looking for more people to contribute, whether it be simple corrections or contributing an entire new section. If you are interested write to arajen@byg.dtu.dk to hear more!
 
 
