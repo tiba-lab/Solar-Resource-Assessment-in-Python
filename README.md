@@ -11,15 +11,15 @@ Solar resource assessment is advancing rapidly, however, while new advances are 
 Contrary to traditional textbooks, this guide presents a general introduction of the topics along with documented how-to examples using Python code. This is achieve by using Jupyter Notebooks, which allows for a seamless integration of a explanatory text, code examples, figures, mathematical equations, and references. Python was chosen due to it being open-source, easy to learn and the primary choice for the majority of [open-source solar and PV libraries](https://openpvtools.readthedocs.io), including PVlib Python which will be used extensively in this guide.
 
 ### Contents
-1. [Introduction](/notebooks/introduction.ipynb)
-2. [Solar components and geometry](/notebooks/solar_components_and_geometry.ipynb)
-3. [Solar radiation modelling](/notebooks/solar_radiation_modelling.ipynb)
-4. [Solar resource data](/notebooks/solar_resource_data.ipynb)
-5. [Quality assessment](/notebooks/quality_asessment.ipynb)
-6. [Manipulating time series](/notebooks/manipulating_time_series.ipynb)
-7. [Forecasting](/notebooks/forecasting.ipynb)
-8. [Solar power modelling](/notebooks/solar_power_modelling.ipynb)
-9. [Benchmarking](/notebooks/benchmarking.ipynb)
+1. [Introduction](https://nbviewer.jupyter.org/github/AssessingSolar/Solar-Resource-Assessment-in-Python/blob/main/notebooks/introduction.ipynb)
+2. [Solar components and geometry](https://nbviewer.jupyter.org/github/AssessingSolar/Solar-Resource-Assessment-in-Python/blob/main/notebooks/solar_components_and_geometry.ipynb)
+3. [Solar radiation modelling](https://nbviewer.jupyter.org/github/AssessingSolar/Solar-Resource-Assessment-in-Python/blob/main/notebooks/solar_radiation_modelling.ipynb)
+4. [Solar resource data](https://nbviewer.jupyter.org/github/AssessingSolar/Solar-Resource-Assessment-in-Python/blob/main/notebooks/solar_resource_data.ipynb)
+5. [Quality assessment](https://nbviewer.jupyter.org/github/AssessingSolar/Solar-Resource-Assessment-in-Python/blob/main/notebooks/quality_asessment.ipynb)
+6. [Manipulating time series](https://nbviewer.jupyter.org/github/AssessingSolar/Solar-Resource-Assessment-in-Python/blob/main/notebooks/manipulating_time_series.ipynb)
+7. [Forecasting](https://nbviewer.jupyter.org/github/AssessingSolar/Solar-Resource-Assessment-in-Python/blob/main/notebooks/forecasting.ipynb)
+8. [Solar power modelling](https://nbviewer.jupyter.org/github/AssessingSolar/Solar-Resource-Assessment-in-Python/blob/main/notebooks/solar_power_modelling.ipynb)
+9. [Benchmarking](https://nbviewer.jupyter.org/github/AssessingSolar/Solar-Resource-Assessment-in-Python/blob/main/notebooks/benchmarking.ipynb)
 
 
 ### How to contribute
