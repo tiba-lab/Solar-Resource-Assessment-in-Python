@@ -80,11 +80,11 @@ googleanalytics_enabled = True
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'sphinx_book_theme'  # original='alabaster', sphinx_rtd_theme
+html_theme = 'sphinx_book_theme'
 
 html_theme_options = {
-    "path_to_docs": "sphinx/",
-    "repository_url": "https://github.com/solar-python/solar-python",
+    "path_to_docs": "content/",
+    "repository_url": "https://github.com/AssessingSolar/Solar-Resource-Assessment-in-Python",
     "use_repository_button": True,  # adds a link to your repository
     #"use_edit_page_button": True,  # adds a button to each page that will allow users to edit the page text directly and submit a pull request to update the documentation
     "use_issues_button": True,  # adds button to open an issue about the current page
