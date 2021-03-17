@@ -1,11 +1,13 @@
 # Quality assessment of solar irradiance data
 
-It is virtually impossible to make continious irradinace measurements without occasionally missing data and some form of erroneously data. While data providers often conduct a basic quality check, users of irradiance data are urged to conduct their own quality assessment. However, there exists numerous methods for this, but there is no commonly agreed upon methodology within the scientific community and hence each user often ends up with his or her own method of quality assessing data and treating questionable data.
+It is virtually impossible to make continious solar irradiance measurements without some amount of missing and erroneously data. While data providers often conduct a basic quality check, users of irradiance data are strongly urged to conduct their own quality assessment, as the necessary level of quality control depends on the application. There exists numerous methods for quality assessment of irradiance time-series, however, there is no commonly agreed upon methodology within the scientific community and hence each user often ends up with his or her own method of quality assessing data and flagging/removing questionable data.
+
+This section aims at giving an introduction to the most commonly used quality assessment methods and a practical guide in how to apply them.
 
 <br>
 
 ## Load data
-In order to demonstrate the quality assessment methods which will be introduced in this notebook, some sample data is needed. In the following code block, a two year dataset of GHI, DHI, and DNI from the [Technical University of Denmark](http://climatestationdata.byg.dtu.dk/GetData) is read into a Pandas DataFrame. The data file can be downloaded [here](https://www.dropbox.com/s/0wnz5b7454mit8o/solar_irradiance_dtu_2018_2020.csv?dl=0). It is important to note, that in order to calculate solar angles and sunrise/sunset times, the index must be timezone aware.
+In order to demonstrate the quality assessment methods which will be introduced in this notebook, some sample data is needed. In the following code block, a two year dataset of GHI, DHI, and DNI from the [Technical University of Denmark](http://climatestationdata.byg.dtu.dk/GetData) is read into a Pandas DataFrame. The data file can be downloaded [here](https://www.dropbox.com/s/0wnz5b7454mit8o/solar_irradiance_dtu_2018_2020.csv?dl=1). It is important to note, that in order to calculate solar angles and sunrise/sunset times, the index must be timezone aware.
 
 import pandas as pd
 import numpy as np
@@ -15,15 +17,17 @@ import datetime as dt
 import pvlib
 
 data_path = 'https://www.dropbox.com/s/qd8aw2ug8s7dq4u/solar_irradiance_dtu_2019_extended.csv?dl=1'
+
 df = pd.read_csv(data_path, index_col=[0], parse_dates=[0])
-df.index = df.index.tz_localize('UTC') # Make index timezone aware
+df.index = df.index.tz_localize('UTC')  # Make index timezone aware
 original_entries = df.shape[0]
-df.head()
+
+df.head()  # Print the first five lines of the DataFrame
 
 <br>
 
 ## Visual inspection
-The first check of the data consists of a visualization of the time series. For this purpose, the different measurements have been plotted as a function of time next to a histogram. Generally, this first qualitative analysis allows detecting major issues in the measurement. For our test sites, only slightly high DHI values can be observed for some stations. Nevertheless, it is not possible to judge their plausibility at this stage of the data analysis.
+As a first check it is important to visualize the data, in order to ensure that the data has been loaded as expected and to detect major issues. For this purpose, the different measurements have been plotted as a function of time, as well as a histogram. Generally, this first qualitative analysis allows detecting major issues in the data set. Nevertheless, it is not possible to judge their plausibility at this stage of the data analysis.
 
 fig, axes = plt.subplots(nrows=3, ncols=2, figsize=(12,8), gridspec_kw={'width_ratios':[3,1]})
 for i, c in enumerate(['GHI','DHI','DNI']):
@@ -37,7 +41,7 @@ fig.tight_layout()
 <br>
 
 ## Checking for missing data
-Depending on the source of the data, there may be significnatly amount of missing data or gaps in the time series. This is typicaly for ground measurements, where cleaning events and periods of instrument malfunction have often are removed. Preferably the timestamps for these periods should still be present in the dataset with a corresonding nan entry, though sometimes the time stamp entries have been entirely omitted. Therfore, it is important to first ensure that the time series has a consistent frequency, e.g. that that there are missing time entries. This can easily be achieved using the *asfreq* function, which converts the time-series to a consistent frequency (e.g. 1 min., 15 min., or 1 h), by adding missing rows. First then can the missing data be quantified accurately and the subsequent 2D plot be generated in the next section.
+Depending on the source of the data, there may be significnatly amount of missing data or gaps in the time series. This is typicaly for ground measurements, where cleaning events and periods of instrument malfunction have often been removed. Preferably the timestamps for these periods should still be present in the dataset with a corresonding nan entry, though sometimes the time stamp entries have been entirely omitted. Therefore, it is important to first ensure that the time series has a consistent frequency, e.g. that that there are no missing time entries. This can easily be achieved using the *asfreq* function, which converts the time-series to a consistent frequency (e.g. 1 min., 15 min., or 1 h), by adding missing rows. First then can the amount of missing data be quantified and the subsequent 2D plots be generated in the next section.
 
 df = df.asfreq('1min') # Convert TimeSeries to specified frequency
 print('Missing rows added: {:.1f} %'.format((df.shape[0]-original_entries)/df.shape[0]*100))
@@ -96,21 +100,20 @@ recommened by the BSRN. This first quality control consists in a set of two test
 ### Physical possible limits
 Physically Possible Limits (PPL) check the maximum and minimum limits that can be reached by irradiance, the upper limits depend on the solar zenith angle, the minimal value of solar irradiance must be 0 W/m², but because of the radiative cooling at night the limit is set at -4 W/m², the test applies independently to each of the three components as follows:
 
-$ -4 \text{ W/m$^2$} < \text{GHI} < S_a \cdot 1.5 \mu_0^{1.2} + 100 \text{ W/m$^2$}$
+$$ -4 \text{ W/m^2} < \text{GHI} < S_a \cdot 1.5 \mu_0^{1.2} + 100 \text{ W/m^2}$$
 
-$ -4 \text{ W/m$^2$} < \text{DHI} < S_a \cdot 0.95 \mu_0^{1.2} + 50 \text{ W/m$^2$}$
+$$ -4 \text{ W/m$^2$} < \text{DHI} < S_a \cdot 0.95 \mu_0^{1.2} + 50 \text{ W/m^2}$$
 
-$ -4 \text{ W/m$^2$} < \text{DNI} < S_a $
-
+$$ -4 \text{ W/m$^2$} < \text{DNI} < S_a $$
 
 ### Extremely rare limits
 The limits of the "Extremely Rare Limits"(ERL) procedure are more strict than those of the "Physically Possible" test. ERL differs from the PPL test in that the measurements rarely reach these limits, and even if the case is only for short periods of a few seconds to one or two minutes, and also in those measurements violating these limits are not necessarily incorrect but their plausibility should be checked more specifically. The ERL limits are defined as follows:
 
-$ -2 \text{ W/m$^2$} < \text{GHI} < S_a \cdot 1.2 \mu_0^{1.2} + 50 \text{ W/m$^2$}$
+$$ -2 \text{ W/m$^2$} < \text{GHI} < S_a \cdot 1.2 \mu_0^{1.2} + 50 \text{ W/m$^2$}$$
 
-$ -2 \text{ W/m$^2$} < \text{DHI} < S_a \cdot 0.75 \mu_0^{1.2} + 30 \text{ W/m$^2$}$
+$$ -2 \text{ W/m$^2$} < \text{DHI} < S_a \cdot 0.75 \mu_0^{1.2} + 30 \text{ W/m$^2$}$$
 
-$ -2 \text{ W/m$^2$} < \text{DNI} < S_a \cdot 0.95 \mu_0^{0.2} + 10 \text{ Wm$^{-2}$}$
+$$ -2 \text{ W/m$^2$} < \text{DNI} < S_a \cdot 0.95 \mu_0^{0.2} + 10 \text{ Wm$^{-2}$}$$
 
 A graphical representation of these two tests is possible by representing the 10-minute averages of GHI, DHI or DNI as a function of the irradiance received at the top of the atmosphere (TOA). This representation is shown in Fig. 7 where the one-component PPL and ERL tests are represented by green and red lines respectively. In view of the QC equations, it might have been simpler to use the cosine of the zenith solar angle for the graphical representation of the QC. However, we opted for the irradiance at the top of the atmosphere because we judged this quantity to be more intuitive. Finally, another quantity would have been more suitable to represent the quality control of the DNI but we chose to keep the same quantity between the different representations for consistency reasons.
 
@@ -147,7 +150,7 @@ fig.tight_layout()
 ### Diffuse ratio test
 Another test recommended by BSRN is the two-component test where the consistency of independent measurements is tested. Where GHI and DHI measurements are available, a comparison of these two measures can be checked for consistency by applying, for GHI>50 W/m², the following two-component tests:
 
-$ 0.92 < \frac{GHI}{\text{DHI + DNI cos($\theta_z$)}} < 1.08 $
+$$ 0.92 < \frac{GHI}{\text{DHI + DNI cos($\theta_z$)}} < 1.08 $$
 
 These tests are not possible for GHI values below 50 W/m². For the visual representation of this test, we have chosen to represent the ratio DHI/GHI as a function of the solar zenith angle. In the plot below, all values of GHI< 50 W/m² are represented by grey dots and the values for which GHI>50 W/m² are represented by blue dots. The limits defined by the two equations above are represented by red lines.
 
@@ -173,7 +176,7 @@ df['sumsw'] = df['DHI'] + df['DNI']*np.cos(np.deg2rad(df['zenith']))
 df['sumsw_ratio'] = df['GHI'] / df['sumsw']
 
 fig, ax = plt.subplots(figsize=(8,5))
-df[(df['zenith']<93)&(df['GHI']>50)].plot.scatter(ax=ax, x='zenith', y='sumsw_ratio',
+df[(df['zenith']<93)&(df['GHI']>50)].plot.scatter(ax=ax, x='zenith', y='sumsw_ratio', alpha=0.76,
                                                   s=1, c='k', xlim=[20,93], ylim=[0.5,1.5])
 ax.plot([0,75,75,93], [1.08,1.08,1.15,1.15], c='r')
 ax.plot([0,75,75,93], [0.92,0.92,0.85,0.85], c='r')

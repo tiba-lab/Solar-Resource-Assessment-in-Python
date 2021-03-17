@@ -34,7 +34,7 @@ show_authors = False
 extensions = [
     'sphinx.ext.autodoc',  # automatic documentation of functions
     'sphinx.ext.mathjax', # renders readable math live in the browser
-    'sphinxcontrib.googleanalytics',  #
+    #'sphinxcontrib.googleanalytics',  #
     'sphinx_thebe',  # converts static HTML pages into interactive pages with code cells run remotely by a Binder kernel
     'sphinx.ext.githubpages', # creates .nojekyll file necessary for GitHub
     'IPython.sphinxext.ipython_console_highlighting',
@@ -72,8 +72,8 @@ pygments_style = 'sphinx'
 #todo_include_todos = True
 
 # Google Analytics ID to enable tracking of site traffic
-googleanalytics_id = "G-J6885V9EEK"
-googleanalytics_enabled = True
+#googleanalytics_id = "G-J6885V9EEK"
+#googleanalytics_enabled = True
 
 
 # -- Options for HTML output -------------------------------------------------
